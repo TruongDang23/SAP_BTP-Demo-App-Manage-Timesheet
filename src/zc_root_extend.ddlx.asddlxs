@@ -1,0 +1,73 @@
+@Metadata.layer: #CORE //CORE nếu như mình là nhà cung cấp ứng dụng
+
+@UI:
+{
+ //Thiết lập header cho giao diện
+ headerInfo:
+  {
+    typeName: 'Manage Timesheet',
+    typeNamePlural: 'Manage Timesheets',
+    title: { type: #STANDARD, value: 'name' } //Tiêu đề của page là tên của người dùng ( name )
+  },
+  
+  //Sắp xếp dữ liệu theo working_day, chiều tăng dần
+  presentationVariant: [{ sortOrder: [{ by: 'name', direction: #DESC }, { by: 'working_day', direction: #DESC } ] }]
+}
+annotate entity ZC_ROOT
+    with 
+{
+// Thiết lập page có 2 phần: header ( Thông tin tổng quan ) và items ( Thông tin chi tiết )
+  @UI.facet: 
+  [
+    {
+        id:       'Timesheet',
+        purpose:  #STANDARD,
+        type:     #IDENTIFICATION_REFERENCE,
+        label:    'Timesheet',
+        position: 10 
+    },
+    { 
+        id:       'Details',
+        purpose:  #STANDARD,
+        type:     #LINEITEM_REFERENCE,
+        label:    'Details',
+        position: 20,
+        targetElement: '_child'
+    }
+  ]
+  
+    @UI: 
+    {
+      identification:[ { position: 1, label: 'UserID' } ]
+    }   
+    userid;
+    
+    @UI: 
+    {
+      lineItem: [ { position: 10, label: 'Working day' } ],
+      identification:[ { position: 10, label: 'Working day' } ]
+    }   
+    working_day;
+    
+    @UI: 
+    {
+      lineItem: [ { position: 20, label: 'Name' } ],
+      identification:[ { position: 20, label: 'Name' } ]
+    }   
+    name;
+    
+    @UI: 
+    {
+      lineItem: [ { position: 30, label: 'Total Hours' } ],
+      identification:[ { position: 30, label: 'Total Hours' } ]
+    }
+    total_hours;
+    
+    @UI: 
+    {
+      lineItem: [ { position: 40, label: 'Status', criticality: 'Criticality', criticalityRepresentation: #WITH_ICON } ],
+      identification:[ { position: 40, label: 'Status' } ],
+      selectionField: [{ position: 40 }] //Vì thuộc tính Status có search help nên cần có selectionField để hệ thống hiển thị thanh searchhelp cho thuộc tính đó
+    }
+    status;
+}

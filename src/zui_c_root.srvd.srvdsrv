@@ -1,0 +1,5 @@
+@EndUserText.label: 'Service Definition for Root'
+define service ZUI_C_ROOT {
+  expose ZC_ROOT;
+  expose ZC_CHILD;
+}

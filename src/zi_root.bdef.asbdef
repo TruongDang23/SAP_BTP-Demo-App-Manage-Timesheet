@@ -1,0 +1,49 @@
+managed;
+strict ( 2 ); //strict mode để đảm bảo tính toàn vẹn của dữ liệu khi thực hiện các hành vi managed
+
+define behavior for ZI_ROOT alias _root
+implementation in class zbp_i_root unique
+persistent table ztb_header
+lock master
+authorization master ( instance ) //authorization for root node
+early numbering
+//etag master <field_name>
+{
+  mapping for ztb_accounts
+  {
+    userid = userid;
+    working_day = working_day;
+    name = name;
+  }
+
+  create;
+  update;
+  delete;
+  field ( readonly ) userid, total_hours, status, name;
+  field ( readonly : update ) working_day;
+
+  association _child { create( precheck ); }
+  determination getName on save { create; }
+}
+
+define behavior for ZI_CHILD alias _child
+implementation in class zbp_i_child unique
+persistent table ztb_tsheet
+lock dependent by _root
+authorization dependent by _root //authorization for child node. Its dependent by root node
+//etag master <field_name>
+early numbering
+{
+  update ( precheck );
+  delete;
+  field ( readonly ) timesheet_id, user_id, working_day, working_hours, status;
+
+  action ( features: instance ) Sending result [1] $self;
+  action ( features: instance ) Cancel result [1] $self;
+
+  determination setStatus on save { create; }
+  determination setHours on modify { field start_time; field end_time; }
+
+  side effects { field start_time affects field _root.total_hours, field _root.status; field end_time affects field _root.total_hours, field _root.status; }
+  association _root;
+}

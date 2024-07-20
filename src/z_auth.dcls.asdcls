@@ -1,0 +1,11 @@
+@EndUserText.label: 'Authentication'
+@MappingRole: true
+define role Z_AUTH {
+    grant 
+        select
+            on
+                ZI_ROOT;
+//                    where
+//                        userid = $session.user;
+                        
+}

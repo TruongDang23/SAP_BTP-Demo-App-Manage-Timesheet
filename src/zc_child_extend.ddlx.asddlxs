@@ -1,0 +1,83 @@
+@Metadata.layer: #CORE
+
+@UI:
+{
+ //Thiết lập header cho giao diện
+ headerInfo:
+  {
+    typeName: 'Detail',
+    typeNamePlural: 'Details',
+    title: { type: #STANDARD, value: 'working_day' } //Tiêu đề của page là ngày thực hiện ( WorkingDay )
+  }
+}
+
+annotate entity ZC_CHILD
+    with 
+{
+  @UI.facet: 
+  [
+    {
+        id:       'Details',
+        purpose:  #STANDARD,
+        type:     #IDENTIFICATION_REFERENCE,
+        label:    'Details',
+        position: 10 
+    }
+  ]
+  
+    @UI: 
+    {
+      identification:[ { position: 20, label: 'Timesheet ID' } ],
+      lineItem: [ { position: 20, label: 'Timesheet ID' } ]
+    }
+    timesheet_id;
+    
+    @UI.hidden: true
+    user_id;
+    
+    @UI: 
+    {
+      identification:[ { position: 40, label: 'Task' } ],
+      lineItem: [ { position: 30, label: 'Task' } ]
+    }
+    task;
+    
+    @UI: 
+    {
+      identification:[ { position: 30, label: 'Day' } ],
+      lineItem: [ { position: 40, label: 'Day' } ]
+    }
+    working_day;
+    
+    @UI: 
+    {
+      identification:[ { position: 60, label: 'Start time' } ],
+      lineItem: [ { position: 50, label: 'Start time' } ]
+    }
+    start_time;
+    
+    @UI: 
+    {
+      identification:[ { position: 80, label: 'End time' } ],
+      lineItem: [ { position: 60, label: 'End time' } ]
+    }
+    end_time;
+    
+    @UI: 
+    {
+      identification:[ { position: 50, label: 'Hours' } ],
+      lineItem: [ { position: 70, label: 'Hours' } ]
+    }
+    working_hours;
+   
+    @UI:
+    { 
+      lineItem: [ { position: 80, label: 'Timesheet Status', criticality: 'Criticality', criticalityRepresentation: #WITH_ICON },
+                  { type: #FOR_ACTION, dataAction: 'Sending', label: 'Submit' },
+                  { type: #FOR_ACTION, dataAction: 'Cancel', label: 'Cancel' } ],
+      identification: [ { position: 70, label: 'Timesheet Status' },
+                        { type: #FOR_ACTION, dataAction: 'Sending', label: 'Submit' },
+                        { type: #FOR_ACTION, dataAction: 'Cancel', label: 'Cancel' } ]
+    }
+    status;
+}

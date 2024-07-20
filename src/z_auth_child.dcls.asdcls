@@ -1,0 +1,12 @@
+@EndUserText.label: 'Authentication for child'
+@MappingRole: true
+define role Z_AUTH_CHILD {
+    grant
+        select
+            on
+                ZI_CHILD;
+                    //where user_id = 'U001';
+                        //user_id <> userid => can't inheriting
+                        //inheriting conditions from entity ZI_ROOT;
+                        
+}

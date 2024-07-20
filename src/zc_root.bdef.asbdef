@@ -1,0 +1,21 @@
+projection;
+strict ( 2 );
+use side effects;
+
+define behavior for ZC_ROOT alias _root
+{
+  use create;
+  use update;
+  use delete;
+
+  use association _child { create; }
+}
+
+define behavior for ZC_CHILD alias _child
+{
+  use update;
+  use delete;
+  use action Cancel;
+  use action Sending;
+  use association _root;
+}
