@@ -4,9 +4,11 @@ Viết một ứng dụng Quản lý Timesheet của nhân viên
 Giao diện thống kê chính:
 - Hiển thị một danh sách theo cấu trúc: MSNV | Tên Nhân viên | Ngày | Tổng giờ làm | Status
 - Trong đó MSNV và Tên nhân viên sẽ tự điền theo account đăng nhập.
-- Những ngày làm < 8h thì hiển thị status: chữ "Warning", ký hiệu tam giác cảnh báo
-- Những ngày làm >= 8h, <= 12h thì hiển thị status: chữ "Good", ký hiệu dấu tick xanh
-- Những ngày làm > 12h, hiển thị status: chữ "Exceed", ký hiệu chấm thang đỏ
+- Những ngày làm >= 5h, < 8h thì hiển thị status: chữ "Warning", ký hiệu tam giác cảnh báo
+- Những ngày làm >= 8h thì hiển thị status: chữ "Good", ký hiệu dấu tick xanh
+- Những ngày làm < 4h, hiển thị status: chữ "Try work harder", ký hiệu chấm thang đỏ
 
 Giao diện chi tiết khi bấm vào một item cụ thể:
 - Ngày | Công việc thực hiện | Thời gian thực hiện | Số giờ cụ thể
+
+Các timesheets sau khi tạo xong sẽ bấm vào nút "Send" để gửi cho cấp trên duyệt. Timesheet có các trạng thái như: Created | Waiting for approve | Cancel | Approval
