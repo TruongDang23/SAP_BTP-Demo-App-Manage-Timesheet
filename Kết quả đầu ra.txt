@@ -1,0 +1,12 @@
+Viết một ứng dụng Quản lý Timesheet của nhân viên
+- Người dùng (Nhân viên) sẽ mở ứng dụng ra để nhập các công việc mình làm kèm với thời gian thực hiện
+- Hệ thống sẽ tính tổng số giờ làm của nhân viên đó trong các ngày để hiển thị số liệu thống kê.
+Giao diện thống kê chính:
+- Hiển thị một danh sách theo cấu trúc: MSNV | Tên Nhân viên | Ngày | Tổng giờ làm | Status
+- Trong đó MSNV và Tên nhân viên sẽ tự điền theo account đăng nhập.
+- Những ngày làm < 8h thì hiển thị status: chữ "Warning", ký hiệu tam giác cảnh báo
+- Những ngày làm >= 8h, <= 12h thì hiển thị status: chữ "Good", ký hiệu dấu tick xanh
+- Những ngày làm > 12h, hiển thị status: chữ "Exceed", ký hiệu chấm thang đỏ
+
+Giao diện chi tiết khi bấm vào một item cụ thể:
+- Ngày | Công việc thực hiện | Thời gian thực hiện | Số giờ cụ thể
