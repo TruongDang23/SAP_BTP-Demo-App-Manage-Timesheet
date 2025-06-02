@@ -1,0 +1,4 @@
+@EndUserText.label: 'Service definition'
+define service ZUI_ADMIN_ROOT {
+  expose ZC_ROOT_ADMIN;
+}

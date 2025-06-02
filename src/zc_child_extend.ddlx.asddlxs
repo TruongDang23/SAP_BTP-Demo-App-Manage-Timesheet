@@ -72,12 +72,20 @@ annotate entity ZC_CHILD
    
     @UI:
     { 
-      lineItem: [ { position: 80, label: 'Timesheet Status', criticality: 'Criticality', criticalityRepresentation: #WITH_ICON },
+      lineItem: [ { position: 80, label: 'Status', criticality: 'Criticality', criticalityRepresentation: #WITH_ICON },
                   { type: #FOR_ACTION, dataAction: 'Sending', label: 'Submit' },
                   { type: #FOR_ACTION, dataAction: 'Cancel', label: 'Cancel' } ],
-      identification: [ { position: 70, label: 'Timesheet Status' },
+      identification: [ { position: 70, label: 'Status' },
                         { type: #FOR_ACTION, dataAction: 'Sending', label: 'Submit' },
                         { type: #FOR_ACTION, dataAction: 'Cancel', label: 'Cancel' } ]
     }
     status;
+    
+    
+    @UI: 
+    {
+      identification:[ { position: 90, label: 'Reason' } ],
+      lineItem: [ { position: 90, label: 'Reason' } ]
+    }
+    reason;
 }

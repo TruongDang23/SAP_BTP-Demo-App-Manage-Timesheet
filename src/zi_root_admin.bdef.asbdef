@@ -1,0 +1,45 @@
+managed implementation in class zbp_i_root_admin unique;
+strict ( 2 );
+with draft;
+
+define behavior for ZI_ROOT_ADMIN //alias <alias_name>
+persistent table ztb_tsheet
+draft table ztb_tsheet_d
+etag master local_last_changed_at
+lock master total etag last_changed_at
+authorization master ( global, instance )
+{
+  create ( authorization : global );
+  update;
+  delete;
+  field ( readonly ) timesheet_id;
+
+  mapping for ztb_tsheet corresponding
+    {
+      status  = status;
+    }
+
+  determination setReason on modify { field status; }
+  determination triggerOnSave on save { create; }
+
+  field ( features : instance ) reason;
+
+  validation checkStatus on save { field status; }
+
+  action ( features : instance ) Approve result [1] $self;
+  action ( features : instance ) Reject parameter ZI_ABS_REASON result [1] $self;
+
+  side effects
+  {
+    field status affects field reason;
+  }
+
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Edit;
+  draft action Resume;
+  draft determine action Prepare
+  {
+    validation checkStatus;
+  }
+}

@@ -1,5 +1,5 @@
 @AbapCatalog.viewEnhancementCategory: [#NONE]
-@AccessControl.authorizationCheck: #CHECK
+@AccessControl.authorizationCheck: #NOT_REQUIRED
 @EndUserText.label: 'CDS for root'
 @Metadata.ignorePropagatedAnnotations: true
 define root view entity ZI_ROOT as select from ztb_header

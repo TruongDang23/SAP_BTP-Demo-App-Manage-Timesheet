@@ -72,22 +72,23 @@ CLASS lhc__root IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD getName.
-    SELECT SINGLE name
-    FROM ztb_header
-    WHERE userid = @sy-uname
-    INTO @DATA(uname).
-
     READ ENTITIES OF zi_root IN LOCAL MODE
         ENTITY _root
         FIELDS ( name ) WITH CORRESPONDING #( keys )
     RESULT DATA(datas)
     FAILED DATA(fail).
 
+    TRY.
+        data(lv_uname) = cl_abap_context_info=>get_user_description( ).
+      CATCH cx_abap_context_info_error.
+        "handle exception
+    ENDTRY.
+
     LOOP AT datas INTO DATA(data).
         MODIFY ENTITIES OF zi_root IN LOCAL MODE
             ENTITY _root
             UPDATE
-                SET FIELDS WITH VALUE #( ( %tky = data-%tky name = uname ) )
+                SET FIELDS WITH VALUE #( ( %tky = data-%tky name = lv_uname ) )
         REPORTED DATA(update).
     ENDLOOP.
 

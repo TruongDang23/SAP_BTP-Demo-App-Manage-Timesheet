@@ -1,7 +1,8 @@
-@EndUserText.label: 'Projection view for child'
 @AccessControl.authorizationCheck: #NOT_REQUIRED
+@EndUserText.label: 'Projection view for root admin'
 @Metadata.allowExtensions: true
-define view entity ZC_CHILD as projection on ZI_CHILD
+define root view entity ZC_ROOT_ADMIN
+  provider contract transactional_query as projection on ZI_ROOT_ADMIN
 {
     key timesheet_id,
     user_id,
@@ -12,7 +13,5 @@ define view entity ZC_CHILD as projection on ZI_CHILD
     working_hours,
     status,
     reason,
-    Criticality,
-    /* Associations */
-    _root : redirected to parent ZC_ROOT
+    Criticality
 }

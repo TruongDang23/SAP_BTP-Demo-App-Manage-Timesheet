@@ -1,5 +1,5 @@
 @AbapCatalog.viewEnhancementCategory: [#NONE]
-@AccessControl.authorizationCheck: #CHECK
+@AccessControl.authorizationCheck: #NOT_REQUIRED
 @EndUserText.label: 'CDS for summary information'
 @Metadata.ignorePropagatedAnnotations: true
 define view entity ZI_MIDDLE as select from ztb_tsheet as _t

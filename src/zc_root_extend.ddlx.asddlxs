@@ -45,8 +45,10 @@ annotate entity ZC_ROOT
     @UI: 
     {
       lineItem: [ { position: 10, label: 'Working day' } ],
+      selectionField: [ { position: 10 } ],
       identification:[ { position: 10, label: 'Working day' } ]
     }   
+    @EndUserText.label: 'Working Day'
     working_day;
     
     @UI: 

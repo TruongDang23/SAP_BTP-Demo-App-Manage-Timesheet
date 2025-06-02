@@ -1,0 +1,105 @@
+@Metadata.layer: #CORE
+@UI:
+{
+ //Thiết lập header cho giao diện
+ headerInfo:
+  {
+    typeName: 'Manage Timesheet',
+    typeNamePlural: 'Manage Timesheets',
+    title: { type: #STANDARD, value: 'user_id' }, //Tiêu đề của page là tên của người dùng ( name )
+    description: { type: #STANDARD, value: 'task' }
+  },
+
+  //Sắp xếp dữ liệu theo working_day, chiều tăng dần
+  presentationVariant: [{ sortOrder: [{ by: 'working_day', direction: #DESC }, { by: 'user_id', direction: #DESC } ] }]
+}
+annotate entity ZC_ROOT_ADMIN with
+{
+  // Thiết lập page có 1 phần: header ( Thông tin tổng quan )
+  @UI.facet:
+  [
+    {
+        id:       'Timesheet',
+        purpose:  #STANDARD,
+        type:     #IDENTIFICATION_REFERENCE,
+        label:    'Timesheet',
+        position: 10
+    }
+  ]
+
+  @UI:
+  {
+    identification:[ { position: 1 } ],
+    lineItem: [{ position: 1 }]
+  }
+  @EndUserText.label: 'TimeSheet ID'
+  timesheet_id;
+
+  @UI:
+  {
+    lineItem: [ { position: 2 } ],
+    selectionField: [ { position: 2 } ],
+    identification:[ { position: 2 } ]
+  }
+  @EndUserText.label: 'UserID'
+  user_id;
+
+  @UI:
+  {
+    identification:[ { position: 3, label: 'Task' } ],
+    lineItem: [ { position: 3, label: 'Task' } ]
+  }
+  task;
+
+  @UI:
+  {
+    identification:[ { position: 4 } ],
+    lineItem: [ { position: 4 } ],
+    selectionField: [{position: 4}]
+  }
+  @EndUserText.label: 'Working Date'
+  working_day;
+
+  @UI:
+  {
+    identification:[ { position: 5, label: 'Start time' } ],
+    lineItem: [ { position: 5, label: 'Start time' } ]
+  }
+  start_time;
+
+  @UI:
+  {
+    identification:[ { position: 6, label: 'End time' } ],
+    lineItem: [ { position: 6, label: 'End time' } ]
+  }
+  end_time;
+
+  @UI:
+  {
+    identification:[ { position: 7, label: 'Hours' } ],
+    lineItem: [ { position: 7, label: 'Hours' } ]
+  }
+  working_hours;
+
+  @UI:
+  {
+    lineItem: [ { position: 8, label: 'Status',
+                  criticality: 'Criticality',
+                  criticalityRepresentation: #WITH_ICON },
+                { type: #FOR_ACTION, dataAction: 'Approve', label: 'Approve' },
+                { type: #FOR_ACTION, dataAction: 'Reject', label: 'Reject' } ],
+    identification: [ { position: 8, label: 'Status',
+                        criticality: 'Criticality',
+                        criticalityRepresentation: #WITH_ICON },
+                      { type: #FOR_ACTION, dataAction: 'Approve', label: 'Approve' },
+                      { type: #FOR_ACTION, dataAction: 'Reject', label: 'Reject' } ]
+  }
+  status;
+
+
+  @UI:
+  {
+    identification:[ { position: 90, label: 'Reason' } ]
+  }
+  reason;
+}

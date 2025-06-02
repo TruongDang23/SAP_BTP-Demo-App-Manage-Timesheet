@@ -9,20 +9,19 @@ authorization master ( instance ) //authorization for root node
 early numbering
 //etag master <field_name>
 {
-  mapping for ztb_accounts
-  {
-    userid = userid;
-    working_day = working_day;
-    name = name;
-  }
+  mapping for ztb_header
+    {
+      userid      = userid;
+      working_day = working_day;
+      name        = name;
+    }
 
   create;
   update;
   delete;
   field ( readonly ) userid, total_hours, status, name;
   field ( readonly : update ) working_day;
-
-  association _child { create( precheck ); }
+  association _child { create ( precheck ); }
   determination getName on save { create; }
 }
 
@@ -36,14 +35,18 @@ early numbering
 {
   update ( precheck );
   delete;
-  field ( readonly ) timesheet_id, user_id, working_day, working_hours, status;
+  field ( readonly ) timesheet_id, user_id, working_day, working_hours, status, reason;
 
-  action ( features: instance ) Sending result [1] $self;
-  action ( features: instance ) Cancel result [1] $self;
+  action ( features : instance ) Sending result [1] $self;
+  action ( features : instance ) Cancel result [1] $self;
 
   determination setStatus on save { create; }
   determination setHours on modify { field start_time; field end_time; }
 
-  side effects { field start_time affects field _root.total_hours, field _root.status; field end_time affects field _root.total_hours, field _root.status; }
+  side effects
+  {
+    field start_time affects field _root.total_hours, field _root.status, field working_hours;
+    field end_time affects field _root.total_hours, field _root.status, field working_hours;
+  }
   association _root;
 }
